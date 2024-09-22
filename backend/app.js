@@ -3,6 +3,8 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import { checkDatabaseConnection } from './config/db.config.js';
+import urlRouter from './src/routes/url.route.js';
+import errors from './src/middlewares/error.middleware.js';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -16,6 +18,11 @@ app.use(cors({
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use('/api/v1/urls', urlRouter);
+app.use((req, res, next) => {
+  errors.e404(req, res, { message: 'The requested route was not found.' }); 
+});
 
 //Database and server connection
 
