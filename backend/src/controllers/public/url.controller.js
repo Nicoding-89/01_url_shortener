@@ -16,8 +16,9 @@ export const showShortUrl = async (req, res) => {
       return errors.e500(req, res, { message: 'Error retrieving the new URL.' });
     };
 
-    res.json({...newShortUrl, short_url: `${BASE_URL}/${newShortUrl.short_url}`}); //{ shortUrl: `${BASE_URL}/${newShortUrl}` }
+    res.json({...newShortUrl, short_url: `${BASE_URL}/${newShortUrl.short_url}`});
   } catch (error) {
-    errors.e500(req, res, { message: 'An unexpected error occurred while creating the short URL.' });
+    let message = error.dbMessage || 'An unexpected error occurred while creating the short URL.';
+    errors.e500(req, res, { message });    
   };
 };

@@ -19,7 +19,7 @@ export const createShortUrl = async (url, shortUrl) => {
   } catch (error) {
     throw { 
       status: 500, 
-      message: 'Error creating the new URL in the database.' 
+      dbMessage: 'Error creating the new URL in the database.' 
     };
   };
 };
