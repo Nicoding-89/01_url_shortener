@@ -24,3 +24,50 @@ export const createShortUrl = async (url, shortUrl) => {
   };
 };
 
+export const getLongUrlByShortUrl = async (shortUrl) => {
+  const query = {
+    text: `SELECT long_url, id 
+      FROM urls 
+      WHERE short_url = $1;
+    `,
+    values: [shortUrl]
+  };
+
+  try {
+    const { rows } = await pool.query(query);
+
+    if (rows.length > 0) {
+      return {
+        longUrl: rows[0].long_url,
+        id: rows[0].id
+      };
+    };
+
+    return null;
+  } catch (error) {
+    throw { 
+      status: 500, 
+      dbMessage: 'Error retrieving the URL provided by the user.' 
+    };
+  };
+};
+
+export const incrementCounter = async (id) => {
+  const query = {
+    text: `
+      UPDATE urls
+      SET counter = counter + 1
+      WHERE id = $1;
+    `,
+    values: [id]
+  };
+
+  try {
+    await pool.query(query);
+  } catch (error) {
+    throw {
+      status: 500,
+      dbMessage: 'Error updating the counter.'
+    }
+  };
+};

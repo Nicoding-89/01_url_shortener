@@ -22,3 +22,24 @@ export const showShortUrl = async (req, res) => {
     errors.e500(req, res, { message });    
   };
 };
+
+export const redirectUrl = async (req, res) => {
+  const { shortUrl } = req.params;
+
+  try {
+    const { longUrl, id } = await urlModel.getLongUrlByShortUrl(shortUrl);
+
+    if (!longUrl) {
+      return errors.e404(req, res, { message: 'Long URL not found in the database.' });
+    } else if (!id) {
+      return errors.e404(req, res, { message: 'Id not found in the database.' });
+    } else {
+      await urlModel.incrementCounter(id);
+      res.redirect(longUrl);
+    };
+
+  } catch (error) {
+    let message = error.dbMessage || 'Error redirecting to the requested URL. Please try again later.';
+    errors.e500(req, res, { message });
+  };
+};

@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import { checkDatabaseConnection } from './config/db.config.js';
 import urlRouter from './src/routes/url.route.js';
 import errors from './src/middlewares/error.middleware.js';
+import redirectRouter from './src/routes/redirect.route.js';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/v1/urls', urlRouter);
+app.use('/', redirectRouter);
 app.use((req, res, next) => {
   errors.e404(req, res, { message: 'The requested route was not found.' }); 
 });
