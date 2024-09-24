@@ -118,5 +118,4 @@ export const getAllData = async (id) => {
       message: 'Error retrieving the data.'
     };
   };
-
 };
