@@ -43,3 +43,15 @@ export const redirectUrl = async (req, res) => {
     errors.e500(req, res, { message });
   };
 };
+
+export const deleteShortUrl = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await urlModel.deleteUrl(id);
+    res.status(204).send();
+  } catch (error) {
+    let message = error.dbMessage || 'Error deleting the URL. Please try again later.';
+    errors.e500(req, res, { message });
+  };
+};

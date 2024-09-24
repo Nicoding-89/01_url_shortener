@@ -71,3 +71,23 @@ export const incrementCounter = async (id) => {
     }
   };
 };
+
+export const deleteUrl = async (id) => {
+  const query = {
+    text: `
+      DELETE
+      FROM urls 
+      WHERE id = $1;
+    `,
+    values: [id]
+  };
+
+  try {
+    await pool.query(query);
+  } catch (error) {
+    throw {
+      status: 500,
+      dbMessage: 'Error deleting the URL in the database.'
+    }
+  };
+};
