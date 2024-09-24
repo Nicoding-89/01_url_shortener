@@ -91,3 +91,32 @@ export const deleteUrl = async (id) => {
     }
   };
 };
+
+//Future features
+
+export const getAllData = async (id) => {
+  const query = {
+    text: `
+      SELECT long_url, short_url, created_at, counter 
+      FROM urls 
+      WHERE id = $1;
+    `,
+    values: [id]
+  };
+
+  try {
+    const { rows } = await pool.query(query);
+
+    if (rows.length > 0) {
+      return rows[0].counter;
+    };
+
+    return null;
+  } catch (error) {
+    throw {
+      status: 500,
+      message: 'Error retrieving the data.'
+    };
+  };
+
+};
