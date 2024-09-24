@@ -1,0 +1,41 @@
+.container-fluid.header {
+  color: #ffffff;
+  padding: 7rem 5% 10rem;
+  overflow: hidden;
+  background: linear-gradient(rgba(0, 0, 0, 0.47), rgba(0, 0, 0, 0.47)), url('../assets/img/network.jpg');
+  background-size: cover;
+  /* background-position: center;
+  background-repeat: no-repeat; */
+}
+
+.header h1 {
+  font-size: 3.5rem;
+}
+
+.header p {
+  font-size: 1.438rem;
+  margin-top: 25px;  
+  text-align: justify;
+  hyphens: auto;
+  font-weight: 500;
+}
+
+
+
+@media (max-width: 576px) {
+
+  .container-fluid.header{
+    padding-top: 5rem;
+  }
+
+  .header p {
+    text-align: left;
+  }
+}
+
+@media (min-width: 992px) {
+  .container-fluid.header{
+    padding-top: 8rem;
+    padding-bottom: 16rem;
+  }
+}
