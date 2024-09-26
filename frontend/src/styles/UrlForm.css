@@ -1,0 +1,17 @@
+.generate-btn {
+  background-color: #0056b3;
+  font-weight: bold;
+}
+
+.form-control {
+  border: 2px solid #3882F6;
+}
+
+.form-control:hover {
+  border-color: red;
+}
+
+.url-input {
+  margin-bottom: 35px;
+  height: 3rem;
+}
