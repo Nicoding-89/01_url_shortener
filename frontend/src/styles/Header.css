@@ -4,8 +4,6 @@
   overflow: hidden;
   background: linear-gradient(rgba(0, 0, 0, 0.47), rgba(0, 0, 0, 0.47)), url('../assets/img/network.jpg');
   background-size: cover;
-  /* background-position: center;
-  background-repeat: no-repeat; */
 }
 
 .header h1 {

@@ -2,7 +2,7 @@ section.container.url_shortener {
   background-color: hsl(220, 13%, 91%);
   padding-top: 2.5rem;
   padding-bottom: 20%;
-  color: #1f2937;
+  color: #1f2b4d;
   min-height: 100vh;
 }
 
@@ -20,6 +20,8 @@ section.container.url_shortener {
 .container.url_shortener p{
   font-size: 20px;
   font-weight: 400;
+  text-align: justify;
+  hyphens: auto;
 }
 
 .container.url_shortener .url_format {
