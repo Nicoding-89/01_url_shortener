@@ -7,8 +7,7 @@ const urlValidator = (req, res, next) => {
   if(validateUrl(longUrl)) {
     req.longUrl = longUrl;
   } else {
-    let error = { message: 'Invalid URL format.' };
-    return errors.e400(req, res, error);
+    return errors.e400(req, res, { message: 'Invalid URL format.' });
   };
 
   next();
