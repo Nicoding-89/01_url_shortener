@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import '../styles/UrlForm.css'
+import ErrorAlert from './ErrorAlert';
 
 const UrlForm = ({ formState, errorState, handleOnChange, handleOnSubmit, loading }) => {
   return (
@@ -23,7 +24,7 @@ const UrlForm = ({ formState, errorState, handleOnChange, handleOnSubmit, loadin
             Generate
           </button>
         </div>
-        {errorState && <div className="alert alert-danger">{errorState}</div>}
+        {errorState && <ErrorAlert error={errorState} />}
         {loading &&
           <div className="spinner-border text-primary" role="status">
             <span className="visually-hidden">Loading...</span>

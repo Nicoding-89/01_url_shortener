@@ -12,6 +12,10 @@ const fetchData = async (endpoint, method, body = null) => {
 
   try {
     const response = await fetch(endpoint, option);
+    if (response.status === 204) {
+      return null;
+    };
+    
     const data = await response.json();
 
     if (response.ok) {
@@ -22,13 +26,17 @@ const fetchData = async (endpoint, method, body = null) => {
     } else {
       return {
         success: false,
-        message: data.message || 'An error ocurred. Please try again.'
+        errorData: data
       };
     };
   } catch (error) {
-    return {
+    throw {
       success: false,
-      message: 'Network error.'
+      errorData: {
+        status: 500,
+        error: 'Network error.',
+        message: 'An unexpected error occurred. Please try again later.'
+      }
     };
   };
 };
