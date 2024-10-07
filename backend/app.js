@@ -9,11 +9,12 @@ import redirectRouter from './src/routes/redirect.route.js';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173'
 
 //General middlewares
 
 app.use(cors({
-	origin: '*',
+	origin: FRONTEND_URL,
 	methods: 'GET,POST,DELETE'
 }));
 app.use(helmet());
