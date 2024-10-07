@@ -16,7 +16,8 @@ const Urlshortener = () => {
   };
 
   const handleOnDelete = async (id) => {
-    const DELETEURLENDPOINT = `${import.meta.env.VITE_API_URL}/${id}`;
+    const BASE_URL = import.meta.env.VITE_API_URL
+    const DELETEURLENDPOINT = `${BASE_URL}/api/v1/urls/${id}`;
 
     try {
       const response = await fetchData(DELETEURLENDPOINT, 'DELETE');

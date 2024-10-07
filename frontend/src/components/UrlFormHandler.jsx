@@ -6,7 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 const UrlFormHandler = ({ getShortUrl }) => {
   const navigate = useNavigate();
-  const POSTURLENDPOINT = import.meta.env.VITE_API_URL;
+  const BASE_URL = import.meta.env.VITE_API_URL;
+  const POSTURLENDPOINT = `${BASE_URL}/api/v1/urls`;
 
   const [state, setState] = useState({ formState: '', errorState: null, loading: false });
 
