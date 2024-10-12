@@ -4,6 +4,7 @@ import errors from '../../middlewares/error.middleware.js';
 import { nanoid } from 'nanoid';
 
 const BASE_URL = process.env.BASE_URL || 'http://localhost:4000';
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
 
 export const showShortUrl = async (req, res) => {
   const shortUrl = nanoid(8);
@@ -27,20 +28,26 @@ export const redirectUrl = async (req, res) => {
   const { shortUrl } = req.params;
 
   try {
-    const { longUrl, id } = await urlModel.getLongUrlByShortUrl(shortUrl);
-
-    if (!longUrl) {
-      return errors.e404(req, res, { message: 'Long URL not found in the database.' });
-    } else if (!id) {
-      return errors.e404(req, res, { message: 'Id not found in the database.' });
-    } else {
-      await urlModel.incrementCounter(id);
-      res.redirect(longUrl);
+    const result = await urlModel.getLongUrlByShortUrl(shortUrl);
+    if (!result) {
+      return res.redirect(`${FRONTEND_URL}/error`);
+    };
+    
+    const { longUrl, id } = result; 
+    
+    if (!longUrl || !id) {
+      const errorMessage = !longUrl 
+        ? 'Long URL not found in the database.' 
+        : 'Id not found in the database.';
+      return res.redirect(`${FRONTEND_URL}/error?status=404&error=${encodeURIComponent('Not found.')}&message=${encodeURIComponent(errorMessage)}`);
     };
 
+    await urlModel.incrementCounter(id);
+    res.redirect(longUrl);
+
   } catch (error) {
-    let message = error.dbMessage || 'Error redirecting to the requested URL. Please try again later.';
-    errors.e500(req, res, { message });
+    const message = encodeURIComponent(error.dbMessage || 'Error redirecting to the requested URL. Please try again later.');
+    res.redirect(`${FRONTEND_URL}/error?status=500&error=${encodeURIComponent('Internal server error.')}&message=${message}`);
   };
 };
 
