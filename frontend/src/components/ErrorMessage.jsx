@@ -13,8 +13,7 @@ const ErrorMessage = () => {
         <p className='error_status'>{errorData.status || '404'}</p>
         <p className='error_name'>{errorData.error || 'Not found.'}</p>
         <p className='error_message'>{errorData.message || 'The requested resource could not be found.'}</p>
-        {/* <NavLink to='/' className='go_back_link'>Click here to go back</NavLink> */}
-        <button onClick={() => navigate(-1)} className='go_back_link'>Click here to go back</button>
+        <button onClick={() => navigate(-1)} className='btn btn-primary go-back-btn'>Go back</button>
       </div>
     </section>
   )

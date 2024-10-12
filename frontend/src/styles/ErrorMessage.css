@@ -32,8 +32,8 @@
   font-size: 70px;
 }
 
-.go_back_link {
-  font-size: 25px;
+.go-back-btn {
+  font-weight: 700;
 }
 
 @media (max-width: 575px) {
