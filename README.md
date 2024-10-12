@@ -33,6 +33,7 @@ Follow these steps to run the application in your local environment:
     ```bash
     PORT=4000
     BASE_URL=http://localhost:4000
+    FRONTEND_URL=http://localhost:5173
     PGUSER=your_database_user
     PGPASSWORD=your_database_password
     PGHOST=your_database_host
